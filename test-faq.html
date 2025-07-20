@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test FAQ</title>
+    <style>
+        .faq-item {
+            background: white;
+            margin: 10px;
+            border: 1px solid #ccc;
+        }
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            background: #f0f0f0;
+        }
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <h1>FAQ Test</h1>
+    
+    <div class="faq-item">
+        <h3 class="faq-question">Test Question 1?</h3>
+        <div class="faq-answer">
+            <p>Test Answer 1</p>
+        </div>
+    </div>
+    
+    <div class="faq-item">
+        <h3 class="faq-question">Test Question 2?</h3>
+        <div class="faq-answer">
+            <p>Test Answer 2</p>
+        </div>
+    </div>
+    
+    <script>
+        console.log('Script running');
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded');
+            const questions = document.querySelectorAll('.faq-question');
+            console.log('Found questions:', questions.length);
+            
+            questions.forEach(question => {
+                question.addEventListener('click', function() {
+                    console.log('Question clicked');
+                    const faqItem = this.parentElement;
+                    const isActive = faqItem.classList.contains('active');
+                    
+                    // Close all
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Open if wasn't active
+                    if (!isActive) {
+                        faqItem.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
