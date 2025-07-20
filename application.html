@@ -586,8 +586,14 @@
                             <option value="los-angeles">Los Angeles</option>
                             <option value="san-diego">San Diego</option>
                             <option value="austin">Austin</option>
-                            <option value="other">Other city (we'll notify you when we launch there)</option>
+                            <option value="toronto">Toronto</option>
+                            <option value="other">Other city</option>
                         </select>
+                    </div>
+                    
+                    <div class="form-field" id="otherCityField" style="display: none;">
+                        <label for="otherCity">Enter your city</label>
+                        <input type="text" id="otherCity" name="otherCity" placeholder="Your city name">
                     </div>
                 </div>
                 
@@ -1203,6 +1209,22 @@
                     reader.readAsDataURL(file);
                 }
             });
+        });
+        
+        // Handle city dropdown change
+        const citySelect = document.getElementById('city');
+        const otherCityField = document.getElementById('otherCityField');
+        const otherCityInput = document.getElementById('otherCity');
+        
+        citySelect.addEventListener('change', function() {
+            if (this.value === 'other') {
+                otherCityField.style.display = 'block';
+                otherCityInput.required = true;
+            } else {
+                otherCityField.style.display = 'none';
+                otherCityInput.required = false;
+                otherCityInput.value = '';
+            }
         });
         
         // Auto-advance for better UX (optional)
