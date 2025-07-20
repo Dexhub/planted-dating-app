@@ -54,28 +54,11 @@ document.querySelectorAll('.story-beat, .truth-card, .difference-card, .testimon
     observer.observe(el);
 });
 
-// Number animation
+// Number animation - DISABLED for GitHub Pages compatibility
 function animateNumber(element) {
-    const target = element.textContent;
-    const isPercentage = target.includes('%');
-    const isDecimal = target.includes('.');
-    const numericValue = parseFloat(target);
-    
-    let current = 0;
-    const increment = numericValue / 50;
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= numericValue) {
-            current = numericValue;
-            clearInterval(timer);
-        }
-        
-        if (isDecimal) {
-            element.textContent = current.toFixed(1) + (isPercentage ? '%' : 'x');
-        } else {
-            element.textContent = Math.floor(current) + (isPercentage ? '%' : '');
-        }
-    }, 30);
+    // Keep the original number without animation
+    // This ensures GitHub Pages displays the correct static values
+    return;
 }
 
 // Member stories carousel
