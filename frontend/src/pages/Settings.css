@@ -1,0 +1,261 @@
+.settings {
+  min-height: 100vh;
+  padding: 120px 20px 60px;
+  background: var(--light-gray);
+}
+
+.settings-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.settings h1 {
+  font-size: clamp(36px, 6vw, 56px);
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.settings-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.settings-tabs .tab {
+  background: var(--white);
+  border: 2px solid var(--white);
+  padding: 16px 32px;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: 600;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.settings-tabs .tab:hover {
+  transform: translateY(-2px);
+}
+
+.settings-tabs .tab.active {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+
+.settings-section {
+  background: var(--white);
+  padding: 48px;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.settings-section h2 {
+  font-size: 32px;
+  margin-bottom: 32px;
+  font-weight: 700;
+}
+
+.settings-section h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.info-item {
+  padding: 24px;
+  background: var(--light-gray);
+  border-radius: 16px;
+}
+
+.info-item label {
+  display: block;
+  font-size: 14px;
+  color: var(--gray);
+  margin-bottom: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.info-item p {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.info-item .status {
+  color: var(--green);
+  text-transform: capitalize;
+}
+
+.info-item .founding {
+  color: var(--green);
+  font-weight: 700;
+}
+
+.verification-status {
+  margin-bottom: 48px;
+}
+
+.verification-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.verification-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: var(--light-gray);
+  border-radius: 12px;
+  font-size: 18px;
+}
+
+.verification-item.verified {
+  background: rgba(0, 210, 122, 0.1);
+}
+
+.verification-item .icon {
+  font-size: 24px;
+  color: var(--gray);
+}
+
+.verification-item.verified .icon {
+  color: var(--green);
+}
+
+.danger-zone {
+  padding: 32px;
+  background: rgba(255, 68, 68, 0.05);
+  border: 2px solid rgba(255, 68, 68, 0.2);
+  border-radius: 16px;
+}
+
+.danger-zone p {
+  color: var(--gray);
+  margin-bottom: 24px;
+}
+
+.btn-danger {
+  background: #ff4444;
+  color: var(--white);
+  padding: 16px 32px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-danger:hover {
+  background: #cc0000;
+  transform: translateY(-2px);
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.range-inputs input {
+  width: 100px;
+}
+
+.range-inputs span {
+  font-weight: 500;
+}
+
+.distance-input {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.distance-input input[type="range"] {
+  flex: 1;
+  padding: 0;
+  border: none;
+}
+
+.distance-input span {
+  font-weight: 600;
+  color: var(--green);
+  min-width: 80px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+form button[type="submit"] {
+  margin-top: 32px;
+}
+
+@media (max-width: 768px) {
+  .settings-content {
+    max-width: 100%;
+  }
+
+  .settings-section {
+    padding: 32px 20px;
+  }
+
+  .settings-tabs {
+    gap: 12px;
+  }
+
+  .settings-tabs .tab {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .range-inputs {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .distance-input {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .distance-input input[type="range"] {
+    width: 100%;
+  }
+}
