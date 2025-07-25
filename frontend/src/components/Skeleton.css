@@ -1,0 +1,71 @@
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeleton-text {
+  margin-bottom: 8px;
+}
+
+.skeleton-circle {
+  border-radius: 50%;
+}
+
+.skeleton-image {
+  border-radius: 16px;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Profile Card Skeleton */
+.profile-card-skeleton {
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.profile-card-skeleton .skeleton-content {
+  padding: 32px;
+}
+
+/* Match Card Skeleton */
+.match-card-skeleton {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: var(--white);
+  border-radius: 16px;
+  margin-bottom: 16px;
+}
+
+.match-card-skeleton .skeleton-info {
+  flex: 1;
+}
+
+/* Message Skeleton */
+.message-skeleton {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.message-skeleton .skeleton-bubble {
+  flex: 1;
+  max-width: 300px;
+}

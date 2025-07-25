@@ -1,0 +1,133 @@
+.onboarding-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.onboarding-modal {
+  background: var(--white);
+  border-radius: 24px;
+  max-width: 500px;
+  width: 100%;
+  padding: 48px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.skip-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--gray);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.skip-button:hover {
+  background: var(--light-gray);
+  color: var(--black);
+}
+
+.onboarding-content {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.step-content {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.step-icon {
+  font-size: 80px;
+  margin-bottom: 24px;
+  animation: bounce 2s infinite;
+}
+
+.step-content h2 {
+  font-size: 32px;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.step-content p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--gray);
+  white-space: pre-line;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.onboarding-navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.progress-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--light-gray);
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  width: 24px;
+  border-radius: 4px;
+  background: var(--green);
+}
+
+.dot.completed {
+  background: var(--green);
+  opacity: 0.5;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (max-width: 600px) {
+  .onboarding-modal {
+    padding: 32px 24px;
+  }
+
+  .step-icon {
+    font-size: 60px;
+  }
+
+  .step-content h2 {
+    font-size: 28px;
+  }
+
+  .step-content p {
+    font-size: 16px;
+  }
+}

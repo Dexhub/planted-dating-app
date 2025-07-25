@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import api from '../services/api';
 import toast from 'react-hot-toast';
+import FilterModal from '../components/FilterModal';
+import { ProfileCardSkeleton } from '../components/Skeleton';
+import ProgressiveImage from '../components/ProgressiveImage';
 import './Browse.css';
 
 const Browse = () => {
@@ -9,6 +12,16 @@ const Browse = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [swiping, setSwiping] = useState(false);
+  const [filterModalOpen, setFilterModalOpen] = useState(false);
+  const [filters, setFilters] = useState({
+    ageRange: { min: 18, max: 99 },
+    distance: 50,
+    dietaryPreference: 'all',
+    cookingSkill: 'all',
+    interests: [],
+    yearsBased: { min: 0, max: 50 },
+    lastActive: 'all'
+  });
 
   useEffect(() => {
     fetchProfiles();

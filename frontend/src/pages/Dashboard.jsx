@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import api from '../services/api';
+import Onboarding from '../components/Onboarding';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -60,6 +61,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
+      <Onboarding />
       <div className="container">
         <motion.div 
           className="dashboard-header"
