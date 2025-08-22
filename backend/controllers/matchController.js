@@ -1,6 +1,10 @@
 const Match = require('../models/Match');
 const User = require('../models/User');
+const ValuesCompatibilityAnalyzer = require('../utils/valuesCompatibilityAnalyzer');
+const ValuesProfile = require('../models/ValuesProfile');
 const sendEmail = require('../utils/sendEmail');
+const { calculateCompatibility } = require('../services/compatibilityAlgorithm');
+const { generateMatches, getPerformanceMetrics } = require('../services/matchingService');
 
 // @desc    Like/Pass on a user
 // @route   POST /api/matches/swipe
@@ -79,8 +83,9 @@ exports.swipeUser = async (req, res, next) => {
       match.status = 'matched';
       match.matchedAt = Date.now();
       
-      // Calculate compatibility score
-      match.compatibilityScore = await calculateCompatibility(currentUserId, userId);
+      // Calculate comprehensive compatibility score
+      const compatibility = await calculateCompatibility(currentUserId, userId);
+      match.compatibilityScore = compatibility.overall;
       match.sharedInterests = await getSharedInterests(currentUserId, userId);
     }
 
@@ -246,52 +251,45 @@ exports.unmatch = async (req, res, next) => {
   }
 };
 
-// Helper function to calculate compatibility score
-async function calculateCompatibility(userId1, userId2) {
-  const [user1, user2] = await Promise.all([
-    User.findById(userId1),
-    User.findById(userId2)
-  ]);
+// Add new route for getting potential matches
+exports.getPotentialMatches = async (req, res, next) => {
+  try {
+    const { limit = 10, minScore = 50 } = req.query;
+    
+    const matches = await generateMatches(req.user.id, parseInt(limit), {
+      minScore: parseInt(minScore)
+    });
 
-  let score = 0;
-  
-  // Same dietary preference (40 points)
-  if (user1.dietaryPreference === user2.dietaryPreference) {
-    score += 40;
-  } else {
-    score += 20; // Still compatible as vegan/vegetarian
+    res.status(200).json({
+      success: true,
+      data: matches
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Error generating matches',
+      error: err.message
+    });
   }
+};
 
-  // Similar years plant-based (10 points)
-  const yearsDiff = Math.abs(user1.yearsBased - user2.yearsBased);
-  if (yearsDiff <= 1) score += 10;
-  else if (yearsDiff <= 3) score += 5;
-
-  // Location proximity (20 points)
-  if (user1.location.city === user2.location.city) {
-    score += 20;
-  } else if (user1.location.state === user2.location.state) {
-    score += 10;
+// Add route for performance metrics
+exports.getMatchingMetrics = async (req, res, next) => {
+  try {
+    const metrics = getPerformanceMetrics();
+    
+    res.status(200).json({
+      success: true,
+      data: metrics
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching metrics',
+      error: err.message
+    });
   }
-
-  // Shared interests (20 points max)
-  const sharedInterests = user1.interests.filter(interest => 
-    user2.interests.includes(interest)
-  );
-  score += Math.min(sharedInterests.length * 4, 20);
-
-  // Cooking skill compatibility (10 points)
-  if (user1.cookingSkill === user2.cookingSkill) {
-    score += 10;
-  } else {
-    // Complementary skills also get points
-    const skills = ['beginner', 'intermediate', 'advanced', 'chef-level'];
-    const diff = Math.abs(skills.indexOf(user1.cookingSkill) - skills.indexOf(user2.cookingSkill));
-    if (diff === 1) score += 5;
-  }
-
-  return Math.min(score, 100);
-}
+};
 
 // Helper function to get shared interests
 async function getSharedInterests(userId1, userId2) {
@@ -303,4 +301,65 @@ async function getSharedInterests(userId1, userId2) {
   return user1.interests.filter(interest => 
     user2.interests.includes(interest)
   );
+}
+
+// Helper function to calculate values-based compatibility
+async function calculateValuesCompatibility(userId1, userId2) {
+  try {
+    // Check if both users have values profiles
+    const [profile1, profile2] = await Promise.all([
+      ValuesProfile.findOne({ userId: userId1 }),
+      ValuesProfile.findOne({ userId: userId2 })
+    ]);
+
+    // If both have comprehensive values profiles, use sophisticated analysis
+    if (profile1 && profile2 && 
+        profile1.assessmentStatus.completionPercentage >= 80 && 
+        profile2.assessmentStatus.completionPercentage >= 80) {
+      
+      const valuesAnalysis = await ValuesCompatibilityAnalyzer.calculateValuesCompatibility(userId1, userId2);
+      return valuesAnalysis.overallScore;
+    }
+    
+    // If only basic profiles exist, use simplified values assessment
+    return await calculateBasicValuesCompatibility(userId1, userId2);
+  } catch (error) {
+    console.error('Error calculating values compatibility:', error);
+    // Fallback to basic compatibility if values analysis fails
+    return await calculateBasicValuesCompatibility(userId1, userId2);
+  }
+}
+
+// Simplified values compatibility for users without full values profiles
+async function calculateBasicValuesCompatibility(userId1, userId2) {
+  const [user1, user2] = await Promise.all([
+    User.findById(userId1),
+    User.findById(userId2)
+  ]);
+
+  let score = 0;
+  
+  // Dietary preference alignment (40 points)
+  if (user1.dietaryPreference === user2.dietaryPreference) {
+    score += 40;
+  } else {
+    score += 20; // Vegan/vegetarian still compatible
+  }
+
+  // Journey stage compatibility (30 points)
+  const yearsDiff = Math.abs(user1.yearsBased - user2.yearsBased);
+  if (yearsDiff <= 2) score += 30;
+  else if (yearsDiff <= 5) score += 20;
+  else score += 10;
+
+  // Values-related interests (30 points)
+  const valuesInterests = ['activism', 'sustainability', 'gardening'];
+  const user1ValuesInterests = user1.interests?.filter(i => valuesInterests.includes(i)).length || 0;
+  const user2ValuesInterests = user2.interests?.filter(i => valuesInterests.includes(i)).length || 0;
+  
+  // Score based on alignment of values-based interests
+  const valuesAlignment = Math.min(user1ValuesInterests, user2ValuesInterests) * 10;
+  score += valuesAlignment;
+
+  return Math.min(score, 100);
 }

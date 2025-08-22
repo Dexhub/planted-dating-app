@@ -124,6 +124,9 @@
 }
 
 .chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 20px 24px;
   border-bottom: 1px solid var(--light-gray);
   background: var(--white);
@@ -133,6 +136,33 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  text-decoration: none;
+  color: inherit;
+  flex: 1;
+}
+
+.video-call-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--green);
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  margin-left: 16px;
+}
+
+.video-call-btn:hover {
+  background: var(--dark-green);
+  transform: scale(1.1);
+}
+
+.video-call-btn:active {
+  transform: scale(0.95);
 }
 
 .chat-user-photo {

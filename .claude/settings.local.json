@@ -1,27 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(open:*)",
-      "Bash(rm:*)",
-      "Bash(git init:*)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(gh repo create:*)",
-      "Bash(gh repo edit:*)",
-      "Bash(gh api:*)",
-      "Bash(git push:*)",
-      "Bash(find:*)",
-      "Bash(mkdir:*)",
-      "Bash(npm init:*)",
-      "Bash(npm install:*)",
-      "Bash(npm create:*)",
-      "Bash(ls:*)",
-      "Bash(npm run dev:*)",
-      "Bash(brew services:*)",
-      "Bash(chmod:*)",
-      "Bash(curl:*)",
-      "Bash(node server.js)",
-      "Bash(mongod:*)"
+      "mcp__ruv-swarm",
+      "mcp__claude-flow"
     ],
     "deny": []
   }

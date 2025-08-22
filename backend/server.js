@@ -15,6 +15,7 @@ const userRoutes = require('./routes/users');
 const matchRoutes = require('./routes/matches');
 const messageRoutes = require('./routes/messages');
 const uploadRoutes = require('./routes/upload');
+const valuesRoutes = require('./routes/values');
 
 // Import Socket handlers
 const socketHandlers = require('./socket/socketHandlers');
@@ -23,14 +24,14 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server, {
   cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    origin: process.env.CLIENT_URL || 'http://localhost:5173',
     credentials: true
   }
 });
 
 // Middleware
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  origin: process.env.CLIENT_URL || 'http://localhost:5173',
   credentials: true
 }));
 app.use(express.json());
@@ -45,6 +46,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/matches', matchRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/values', valuesRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

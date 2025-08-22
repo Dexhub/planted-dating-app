@@ -3,9 +3,11 @@ import { Toaster } from 'react-hot-toast';
 import { useEffect } from 'react';
 import { AuthProvider } from './contexts/AuthContext';
 import { SocketProvider } from './contexts/SocketContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import PrivateRoute from './components/PrivateRoute';
 import Navbar from './components/Navbar';
 import ErrorBoundary from './components/ErrorBoundary';
+import ThemeToggle from './components/ThemeToggle';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -16,8 +18,12 @@ import Messages from './pages/Messages';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import Restaurants from './pages/Restaurants';
+import Events from './pages/Events';
+import VideoChat from './pages/VideoChat';
+import VideoCallNotification from './components/VideoCallNotification';
 import { registerServiceWorker, initializeNotifications } from './utils/notifications';
 import './styles/global.css';
+import './styles/dark-mode.css';
 
 function App() {
   useEffect(() => {
@@ -34,11 +40,14 @@ function App() {
   return (
     <ErrorBoundary>
       <Router>
-        <AuthProvider>
-          <SocketProvider>
-            <div className="app">
-              <Navbar />
-              <Toaster 
+        <ThemeProvider>
+          <AuthProvider>
+            <SocketProvider>
+              <div className="app">
+                <Navbar />
+                <VideoCallNotification />
+                <ThemeToggle />
+                <Toaster 
                 position="top-center"
                 toastOptions={{
                   duration: 4000,
@@ -100,11 +109,22 @@ function App() {
                     <Restaurants />
                   </PrivateRoute>
                 } />
+                <Route path="/events" element={
+                  <PrivateRoute verified>
+                    <Events />
+                  </PrivateRoute>
+                } />
+                <Route path="/video/:roomId" element={
+                  <PrivateRoute verified>
+                    <VideoChat />
+                  </PrivateRoute>
+                } />
                 <Route path="*" element={<Navigate to="/" />} />
               </Routes>
             </div>
           </SocketProvider>
         </AuthProvider>
+      </ThemeProvider>
       </Router>
     </ErrorBoundary>
   );

@@ -1,0 +1,397 @@
+# Planted ML Recommendation Engine Configuration
+
+# Model Configuration
+model:
+  type: "hybrid_recommender"
+  version: "1.0.0"
+  
+  # Hybrid model weights
+  ensemble_weights:
+    compatibility_scorer: 0.4
+    deep_network: 0.4
+    collaborative_filtering: 0.2
+  
+  # Compatibility Scorer (XGBoost/Random Forest)
+  compatibility_scorer:
+    algorithm: "xgboost"  # Options: xgboost, random_forest
+    parameters:
+      n_estimators: 200
+      max_depth: 6
+      learning_rate: 0.1
+      subsample: 0.8
+      colsample_bytree: 0.8
+      reg_alpha: 0.1
+      reg_lambda: 0.1
+      random_state: 42
+  
+  # Deep Recommendation Network
+  deep_network:
+    embedding_dim: 128
+    hidden_layers: [256, 128, 64]
+    dropout_rate: 0.2
+    batch_norm: true
+    activation: "relu"
+    output_activation: "sigmoid"
+    
+    # Training parameters
+    learning_rate: 0.001
+    batch_size: 256
+    epochs: 100
+    early_stopping_patience: 10
+    validation_split: 0.2
+    
+    # Optimizer settings
+    optimizer: "adam"
+    weight_decay: 0.0001
+    lr_scheduler:
+      type: "step"
+      step_size: 30
+      gamma: 0.5
+
+# Feature Engineering Configuration
+features:
+  # Feature groups and their weights
+  groups:
+    dietary_journey:
+      weight: 0.25
+      features:
+        - motivation_score
+        - strictness_level
+        - journey_stage
+        - social_comfort
+    
+    values_alignment:
+      weight: 0.35
+      features:
+        - animal_rights_score
+        - environmental_score
+        - health_motivation
+        - spiritual_connection
+        - activism_level
+    
+    lifestyle_compatibility:
+      weight: 0.25
+      features:
+        - cooking_skill_level
+        - sustainability_practices
+        - community_involvement
+    
+    behavioral:
+      weight: 0.15
+      features:
+        - swipe_selectivity
+        - message_quality_score
+        - response_time_pattern
+        - engagement_depth
+        - profile_completion
+        - activity_frequency
+  
+  # Feature preprocessing
+  preprocessing:
+    scaling_method: "minmax"  # Options: minmax, standard, robust
+    handle_missing: "impute"  # Options: impute, drop, fill_zero
+    outlier_detection: true
+    outlier_threshold: 3.0  # Standard deviations
+  
+  # Text feature extraction
+  text_features:
+    enable_sentiment: true
+    enable_plant_based_signals: true
+    enable_quality_metrics: true
+    
+    # Plant-based keyword categories
+    plant_based_keywords:
+      diet_types: ["vegan", "vegetarian", "plant-based", "flexitarian", "raw vegan", "whole food"]
+      motivations: ["animals", "environment", "health", "ethics", "spiritual", "climate"]
+      foods: ["tofu", "tempeh", "seitan", "quinoa", "kale", "avocado", "nuts", "beans"]
+      lifestyle: ["sustainable", "organic", "local", "zero waste", "mindful", "compassionate"]
+      activities: ["activism", "volunteering", "cooking", "gardening", "meditation", "yoga"]
+
+# Training Configuration
+training:
+  # Data collection
+  data_collection:
+    lookback_days: 30
+    min_interactions: 10
+    sample_size: 10000
+    validation_split: 0.2
+    test_split: 0.1
+  
+  # Cross-validation
+  cross_validation:
+    enabled: true
+    folds: 5
+    shuffle: true
+    stratify: true
+  
+  # Model selection
+  model_selection:
+    metric: "ndcg_at_10"  # Primary metric for model selection
+    direction: "maximize"
+    
+  # Hyperparameter optimization
+  hyperparameter_optimization:
+    enabled: true
+    method: "optuna"  # Options: optuna, hyperopt, grid_search
+    n_trials: 100
+    timeout_seconds: 3600
+    
+    # Search spaces
+    search_spaces:
+      xgb_n_estimators: [100, 500]
+      xgb_max_depth: [3, 10]
+      xgb_learning_rate: [0.01, 0.3]
+      deep_embedding_dim: [64, 256]
+      deep_learning_rate: [0.0001, 0.01]
+
+# Inference Configuration
+inference:
+  # Performance requirements
+  performance:
+    max_response_time_ms: 100
+    target_throughput_rps: 10000
+    availability_target: 0.999
+  
+  # Caching strategy
+  caching:
+    redis_host: "localhost"
+    redis_port: 6379
+    redis_db: 0
+    
+    # Cache TTL settings (in seconds)
+    ttl:
+      user_profile: 3600      # 1 hour
+      compatibility_score: 7200  # 2 hours
+      precomputed_matches: 21600  # 6 hours
+      model_artifacts: 86400   # 24 hours
+  
+  # Batch processing
+  batch_processing:
+    enabled: true
+    batch_size: 100
+    max_candidates: 1000
+    precompute_top_k: 50
+  
+  # Model serving
+  serving:
+    host: "0.0.0.0"
+    port: 8000
+    workers: 4
+    max_concurrent_requests: 1000
+    timeout_seconds: 30
+
+# Evaluation Configuration
+evaluation:
+  # Metrics to track
+  metrics:
+    ranking:
+      - ndcg_at_5
+      - ndcg_at_10
+      - ndcg_at_20
+      - map_at_10
+      - mrr
+    
+    classification:
+      - precision
+      - recall
+      - f1_score
+      - auc_roc
+    
+    regression:
+      - mse
+      - mae
+      - rmse
+      - pearson_correlation
+      - spearman_correlation
+    
+    diversity:
+      - intra_list_diversity
+      - coverage
+      - novelty
+    
+    fairness:
+      - demographic_parity
+      - equalized_odds
+      - calibration_error
+    
+    business:
+      - user_satisfaction
+      - engagement_rate
+      - conversion_rate
+  
+  # A/B testing
+  ab_testing:
+    significance_level: 0.05
+    power: 0.8
+    minimum_sample_size: 1000
+    test_duration_days: 14
+  
+  # Performance thresholds
+  thresholds:
+    min_ndcg_at_10: 0.7
+    min_precision: 0.6
+    min_recall: 0.6
+    max_demographic_parity: 0.1
+    min_user_satisfaction: 0.75
+
+# Data Configuration
+data:
+  # Database settings
+  database:
+    host: "localhost"
+    port: 5432
+    name: "planted_db"
+    user: "planted_user"
+    # password loaded from environment
+    
+    # Connection pool settings
+    pool_size: 20
+    max_overflow: 30
+    pool_timeout: 30
+    pool_recycle: 3600
+  
+  # Data quality
+  quality_checks:
+    enabled: true
+    min_profile_completeness: 0.7
+    max_missing_features: 5
+    outlier_detection: true
+  
+  # Feature store
+  feature_store:
+    provider: "feast"  # Options: feast, tecton, custom
+    offline_store: "postgresql"
+    online_store: "redis"
+    
+# Monitoring Configuration
+monitoring:
+  # Metrics collection
+  metrics:
+    enabled: true
+    export_interval_seconds: 60
+    
+    # Prometheus settings
+    prometheus:
+      host: "localhost"
+      port: 9090
+      endpoint: "/metrics"
+  
+  # Logging
+  logging:
+    level: "INFO"
+    format: "json"
+    
+    # Log rotation
+    rotation:
+      max_size_mb: 100
+      backup_count: 5
+  
+  # Alerting
+  alerting:
+    enabled: true
+    channels:
+      - "slack"
+      - "email"
+    
+    # Alert rules
+    rules:
+      high_error_rate:
+        threshold: 0.05
+        window_minutes: 5
+      
+      high_latency:
+        threshold_ms: 200
+        window_minutes: 5
+      
+      low_cache_hit_rate:
+        threshold: 0.8
+        window_minutes: 10
+
+# Security Configuration
+security:
+  # Data encryption
+  encryption:
+    at_rest: true
+    in_transit: true
+    algorithm: "AES-256"
+  
+  # Access control
+  access_control:
+    enabled: true
+    role_based: true
+    
+  # Privacy
+  privacy:
+    data_retention_days: 365
+    anonymization: true
+    gdpr_compliance: true
+  
+  # Model security
+  model_security:
+    adversarial_robustness: true
+    input_validation: true
+    output_sanitization: true
+
+# Deployment Configuration
+deployment:
+  # Environment
+  environment: "development"  # Options: development, staging, production
+  
+  # Containerization
+  docker:
+    image: "planted-ml-engine"
+    tag: "latest"
+    registry: "your-registry.com"
+  
+  # Kubernetes
+  kubernetes:
+    namespace: "planted-ml"
+    replicas: 3
+    
+    # Resource requirements
+    resources:
+      requests:
+        cpu: "500m"
+        memory: "1Gi"
+      limits:
+        cpu: "2000m"
+        memory: "4Gi"
+  
+  # Auto-scaling
+  autoscaling:
+    enabled: true
+    min_replicas: 2
+    max_replicas: 10
+    target_cpu_utilization: 70
+    target_memory_utilization: 80
+  
+  # Health checks
+  health_checks:
+    liveness_probe:
+      path: "/health"
+      initial_delay_seconds: 30
+      period_seconds: 10
+    
+    readiness_probe:
+      path: "/ready"
+      initial_delay_seconds: 5
+      period_seconds: 5
+
+# Experimental Features
+experimental:
+  # Advanced algorithms
+  neural_collaborative_filtering: false
+  graph_neural_networks: false
+  transformer_embeddings: false
+  
+  # Multi-objective optimization
+  multi_objective_optimization: false
+  
+  # Federated learning
+  federated_learning: false
+  
+  # Real-time learning
+  online_learning: true
+  
+  # Explainable AI
+  model_interpretability: true

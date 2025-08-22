@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useSocket } from '../contexts/SocketContext';
 import { useAuth } from '../contexts/AuthContext';
 import api from '../services/api';
@@ -8,6 +8,7 @@ import './Messages.css';
 
 const Messages = () => {
   const { matchId } = useParams();
+  const navigate = useNavigate();
   const { user } = useAuth();
   const { socket, joinMatch, sendTypingStatus } = useSocket();
   const [matches, setMatches] = useState([]);
@@ -162,6 +163,23 @@ const Messages = () => {
     }
   };
 
+  const startVideoCall = () => {
+    if (!selectedMatch) return;
+    
+    // Generate a unique room ID for the video call
+    const roomId = `${matchId}-${Date.now()}`;
+    
+    // Notify the other user about the call
+    socket.emit('video:invite', {
+      matchId,
+      receiverId: selectedMatch.user._id,
+      roomId
+    });
+    
+    // Navigate to video chat
+    navigate(`/video/${roomId}`);
+  };
+
   if (loading) {
     return (
       <div className="messages-loading">
@@ -235,6 +253,13 @@ const Messages = () => {
                     <p>{selectedMatch.user.dietaryPreference}</p>
                   </div>
                 </Link>
+                <button 
+                  className="video-call-btn"
+                  onClick={startVideoCall}
+                  title="Start video call"
+                >
+                  📹
+                </button>
               </div>
 
               <div className="messages-list">

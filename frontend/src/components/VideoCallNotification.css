@@ -1,0 +1,123 @@
+.video-call-notification {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  z-index: 9998;
+  min-width: 360px;
+}
+
+.call-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.call-icon {
+  font-size: 48px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.call-info {
+  flex: 1;
+}
+
+.call-info h3 {
+  font-size: 18px;
+  color: #2D3748;
+  margin-bottom: 4px;
+}
+
+.call-info p {
+  color: #718096;
+  font-size: 16px;
+}
+
+.call-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.decline-btn,
+.accept-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.decline-btn {
+  background: #FF5757;
+  color: white;
+}
+
+.decline-btn:hover {
+  background: #E53E3E;
+  transform: scale(1.1);
+}
+
+.accept-btn {
+  background: #00D27A;
+  color: white;
+}
+
+.accept-btn:hover {
+  background: #00A860;
+  transform: scale(1.1);
+}
+
+.decline-btn:active,
+.accept-btn:active {
+  transform: scale(0.95);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .video-call-notification {
+    min-width: 320px;
+    left: 10px;
+    right: 10px;
+    transform: none;
+  }
+
+  .call-icon {
+    font-size: 36px;
+  }
+
+  .call-info h3 {
+    font-size: 16px;
+  }
+
+  .call-info p {
+    font-size: 14px;
+  }
+
+  .decline-btn,
+  .accept-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,348 @@
+/*
+ * Planted Cursor Glow System
+ * Organic movement with smooth pursuit and elegant glow effects
+ */
+
+/* ========================================
+   CURSOR GLOW SETUP
+   Creates the magical glow that follows the cursor
+   ======================================== */
+
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(0, 210, 122, 0.1) 0%,
+    rgba(0, 210, 122, 0.05) 40%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  mix-blend-mode: screen;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+/* Show glow on desktop only */
+@media (min-width: 1024px) and (hover: hover) {
+  body:hover .cursor-glow {
+    opacity: 1;
+  }
+}
+
+/* Hide on mobile and touch devices */
+@media (hover: none) {
+  .cursor-glow {
+    display: none;
+  }
+}
+
+/* ========================================
+   GLOW VARIATIONS
+   Different glow intensities for different contexts
+   ======================================== */
+
+/* Subtle glow for general browsing */
+.cursor-glow-subtle {
+  background: radial-gradient(
+    circle,
+    rgba(0, 210, 122, 0.05) 0%,
+    rgba(0, 210, 122, 0.02) 40%,
+    transparent 70%
+  );
+}
+
+/* Intense glow for interactive elements */
+.cursor-glow-intense {
+  background: radial-gradient(
+    circle,
+    rgba(0, 210, 122, 0.2) 0%,
+    rgba(0, 210, 122, 0.1) 40%,
+    rgba(0, 210, 122, 0.05) 60%,
+    transparent 80%
+  );
+}
+
+/* Warm glow for special sections */
+.cursor-glow-warm {
+  background: radial-gradient(
+    circle,
+    rgba(250, 247, 240, 0.1) 0%,
+    rgba(250, 247, 240, 0.05) 40%,
+    transparent 70%
+  );
+}
+
+/* ========================================
+   INTERACTIVE ELEMENT GLOW
+   Elements that enhance the cursor glow on hover
+   ======================================== */
+
+/* Buttons get enhanced glow */
+.btn:hover ~ .cursor-glow,
+.card:hover ~ .cursor-glow,
+.nav-link:hover ~ .cursor-glow {
+  background: radial-gradient(
+    circle,
+    rgba(0, 210, 122, 0.15) 0%,
+    rgba(0, 210, 122, 0.08) 30%,
+    rgba(0, 210, 122, 0.03) 60%,
+    transparent 80%
+  );
+  width: 500px;
+  height: 500px;
+}
+
+/* Primary buttons get the most intense glow */
+.btn-primary:hover ~ .cursor-glow,
+.btn-accent:hover ~ .cursor-glow {
+  background: radial-gradient(
+    circle,
+    rgba(0, 210, 122, 0.25) 0%,
+    rgba(0, 210, 122, 0.15) 25%,
+    rgba(0, 210, 122, 0.08) 50%,
+    rgba(0, 210, 122, 0.03) 75%,
+    transparent 100%
+  );
+  width: 600px;
+  height: 600px;
+}
+
+/* Text links get a softer glow */
+.text-link:hover ~ .cursor-glow,
+a:hover ~ .cursor-glow {
+  background: radial-gradient(
+    circle,
+    rgba(0, 210, 122, 0.08) 0%,
+    rgba(0, 210, 122, 0.04) 40%,
+    transparent 70%
+  );
+}
+
+/* Form elements get focused glow */
+input:focus ~ .cursor-glow,
+textarea:focus ~ .cursor-glow,
+select:focus ~ .cursor-glow {
+  background: radial-gradient(
+    circle,
+    rgba(0, 210, 122, 0.12) 0%,
+    rgba(0, 210, 122, 0.06) 40%,
+    transparent 70%
+  );
+}
+
+/* ========================================
+   SPECIAL CONTEXT GLOWS
+   Different colors for specific page sections
+   ======================================== */
+
+/* Hero section - warm glow */
+.hero .cursor-glow {
+  background: radial-gradient(
+    circle,
+    rgba(250, 247, 240, 0.15) 0%,
+    rgba(0, 210, 122, 0.1) 30%,
+    rgba(0, 210, 122, 0.05) 60%,
+    transparent 80%
+  );
+}
+
+/* Dark sections - enhanced green glow */
+.bg-black .cursor-glow,
+.dark-section .cursor-glow {
+  background: radial-gradient(
+    circle,
+    rgba(0, 210, 122, 0.2) 0%,
+    rgba(0, 210, 122, 0.1) 40%,
+    rgba(0, 210, 122, 0.05) 70%,
+    transparent 90%
+  );
+}
+
+/* Community sections - warmer tone */
+.community-section .cursor-glow {
+  background: radial-gradient(
+    circle,
+    rgba(0, 210, 122, 0.1) 0%,
+    rgba(250, 247, 240, 0.08) 30%,
+    rgba(0, 210, 122, 0.05) 60%,
+    transparent 80%
+  );
+}
+
+/* ========================================
+   GLOW ANIMATIONS
+   Smooth entrance and interaction animations
+   ======================================== */
+
+/* Pulse animation for special moments */
+@keyframes glow-pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.2;
+  }
+}
+
+.cursor-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* Breathing animation for ambient effect */
+@keyframes glow-breathe {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0.08;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 0.15;
+  }
+}
+
+.cursor-glow-breathe {
+  animation: glow-breathe 4s ease-in-out infinite;
+}
+
+/* Ripple effect for clicks */
+@keyframes glow-ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+.cursor-glow-ripple {
+  animation: glow-ripple 0.6s ease-out;
+}
+
+/* ========================================
+   PERFORMANCE OPTIMIZATIONS
+   Smooth 60fps animations with hardware acceleration
+   ======================================== */
+
+.cursor-glow {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Use transform3d for hardware acceleration */
+.cursor-glow-optimized {
+  transform: translate3d(-50%, -50%, 0);
+}
+
+/* ========================================
+   REDUCED MOTION SUPPORT
+   Respect user preferences for motion
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-glow {
+    display: none;
+  }
+  
+  .cursor-glow-pulse,
+  .cursor-glow-breathe,
+  .cursor-glow-ripple {
+    animation: none;
+  }
+}
+
+/* ========================================
+   DARK MODE ADJUSTMENTS
+   Enhanced glow for dark theme
+   ======================================== */
+
+.dark-mode .cursor-glow {
+  background: radial-gradient(
+    circle,
+    rgba(0, 210, 122, 0.15) 0%,
+    rgba(0, 210, 122, 0.08) 40%,
+    rgba(0, 210, 122, 0.03) 70%,
+    transparent 90%
+  );
+  mix-blend-mode: screen;
+}
+
+.dark-mode .btn:hover ~ .cursor-glow,
+.dark-mode .card:hover ~ .cursor-glow {
+  background: radial-gradient(
+    circle,
+    rgba(0, 210, 122, 0.25) 0%,
+    rgba(0, 210, 122, 0.15) 30%,
+    rgba(0, 210, 122, 0.08) 60%,
+    rgba(0, 210, 122, 0.03) 80%,
+    transparent 100%
+  );
+}
+
+/* ========================================
+   JAVASCRIPT INTEGRATION HELPERS
+   Classes for dynamic glow control
+   ======================================== */
+
+/* Hide glow */
+.cursor-glow-hidden {
+  opacity: 0 !important;
+  transition: opacity 0.3s ease;
+}
+
+/* Show glow */
+.cursor-glow-visible {
+  opacity: 1 !important;
+  transition: opacity 0.3s ease;
+}
+
+/* Freeze glow position */
+.cursor-glow-frozen {
+  transition: none;
+}
+
+/* Fast glow movement */
+.cursor-glow-fast {
+  transition: transform 0.05s ease-out;
+}
+
+/* Slow glow movement */
+.cursor-glow-slow {
+  transition: transform 0.8s ease-out;
+}
+
+/* ========================================
+   ACCESSIBILITY CONSIDERATIONS
+   Ensure glow doesn't interfere with usability
+   ======================================== */
+
+/* High contrast mode - disable glow */
+@media (prefers-contrast: high) {
+  .cursor-glow {
+    display: none;
+  }
+}
+
+/* Focus states should not be obscured */
+*:focus-visible {
+  position: relative;
+  z-index: calc(var(--z-cursor) + 1);
+}
+
+/* Print styles - hide glow */
+@media print {
+  .cursor-glow {
+    display: none;
+  }
+}

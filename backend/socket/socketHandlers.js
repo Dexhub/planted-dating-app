@@ -74,6 +74,51 @@ module.exports = (io) => {
       });
     });
 
+    // Video call handlers
+    socket.on('video:join-room', ({ roomId }) => {
+      socket.join(`video:${roomId}`);
+      socket.to(`video:${roomId}`).emit('video:user-joined', {
+        userId: socket.userId
+      });
+    });
+
+    socket.on('video:invite', ({ matchId, receiverId, roomId }) => {
+      socket.to(`user:${receiverId}`).emit('video:incoming-call', {
+        callerId: socket.userId,
+        callerName: socket.user.firstName,
+        matchId,
+        roomId
+      });
+    });
+
+    socket.on('video:offer', ({ roomId, offer }) => {
+      socket.to(`video:${roomId}`).emit('video:offer', {
+        offer,
+        userId: socket.userId
+      });
+    });
+
+    socket.on('video:answer', ({ roomId, answer }) => {
+      socket.to(`video:${roomId}`).emit('video:answer', {
+        answer,
+        userId: socket.userId
+      });
+    });
+
+    socket.on('video:ice-candidate', ({ roomId, candidate }) => {
+      socket.to(`video:${roomId}`).emit('video:ice-candidate', {
+        candidate,
+        userId: socket.userId
+      });
+    });
+
+    socket.on('video:end-call', ({ roomId }) => {
+      socket.to(`video:${roomId}`).emit('video:end-call', {
+        userId: socket.userId
+      });
+      socket.leave(`video:${roomId}`);
+    });
+
     // Handle disconnection
     socket.on('disconnect', () => {
       console.log(`User ${socket.user.firstName} disconnected`);

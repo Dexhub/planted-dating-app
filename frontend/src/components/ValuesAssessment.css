@@ -1,0 +1,332 @@
+/* Values Assessment Styles */
+.values-assessment {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.assessment-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.assessment-header h1 {
+  font-size: 2.5rem;
+  color: var(--primary-green);
+  margin-bottom: 0.5rem;
+}
+
+.assessment-header p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.progress-bar {
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progress-track {
+  flex: 1;
+  height: 8px;
+  background: var(--background-secondary);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-green), var(--accent-green));
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.section-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  flex: 1;
+  max-width: 140px;
+}
+
+.nav-item.active {
+  background: var(--primary-green-light);
+  color: var(--primary-green);
+}
+
+.nav-item.completed {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.nav-icon {
+  font-size: 1.5rem;
+}
+
+.nav-title {
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.section-content {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.section-header h2 {
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.section-header p {
+  color: var(--text-muted);
+}
+
+.assessment-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-section {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.form-section:last-child {
+  border-bottom: none;
+  margin-bottom: 2rem;
+}
+
+.form-section h3 {
+  font-size: 1.3rem;
+  color: var(--primary-green);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--border-light);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-green);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--background-light);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.checkbox-label:hover {
+  background: var(--primary-green-light);
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary-green);
+}
+
+.product-consciousness {
+  background: var(--background-light);
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.product-consciousness > label {
+  font-weight: 500;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.product-category {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.category-label {
+  font-weight: 500;
+  color: var(--text-primary);
+  min-width: 100px;
+}
+
+.product-category select {
+  flex: 1;
+  max-width: 200px;
+  margin-left: 1rem;
+}
+
+.assessment-controls {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--primary-green);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-green-dark);
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  background: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--background-secondary);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--background-dark);
+}
+
+.btn-secondary:disabled {
+  background: var(--background-light);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.placeholder-section {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.placeholder-section p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .values-assessment {
+    padding: 1rem;
+  }
+  
+  .section-navigation {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .nav-item {
+    flex-direction: row;
+    max-width: none;
+    justify-content: flex-start;
+  }
+  
+  .nav-title {
+    text-align: left;
+  }
+  
+  .assessment-controls {
+    padding: 0 1rem;
+  }
+  
+  .product-category {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .product-category select {
+    margin-left: 0;
+    max-width: none;
+  }
+}
+
+/* Dark mode compatibility */
+@media (prefers-color-scheme: dark) {
+  .section-content {
+    background: var(--background-dark);
+    color: var(--text-light);
+  }
+  
+  .form-group select {
+    background: var(--background-secondary);
+    color: var(--text-light);
+    border-color: var(--border-dark);
+  }
+  
+  .checkbox-label {
+    background: var(--background-secondary);
+  }
+  
+  .product-consciousness {
+    background: var(--background-secondary);
+  }
+}

@@ -1,0 +1,457 @@
+/* Dark Mode Variables */
+.dark-mode {
+  --white: #1a1a1a;
+  --black: #ffffff;
+  --green: #00D27A;
+  --dark-green: #00A860;
+  --light-gray: #2D3748;
+  --gray: #A0AEC0;
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #2D3748;
+  --text-primary: #ffffff;
+  --text-secondary: #E2E8F0;
+  --text-tertiary: #A0AEC0;
+  --border-color: #4A5568;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Dark Mode Overrides */
+.dark-mode body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.dark-mode .navbar {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dark-mode .navbar.scrolled {
+  box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+.dark-mode .nav-link {
+  color: var(--text-secondary);
+}
+
+.dark-mode .nav-link:hover {
+  color: var(--green);
+}
+
+.dark-mode .btn-primary {
+  background: var(--green);
+  color: var(--white);
+}
+
+.dark-mode .btn-primary:hover {
+  background: var(--dark-green);
+}
+
+.dark-mode .btn-secondary {
+  background: transparent;
+  border: 2px solid var(--green);
+  color: var(--green);
+}
+
+.dark-mode .btn-secondary:hover {
+  background: var(--green);
+  color: var(--bg-primary);
+}
+
+/* Forms */
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select {
+  background: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.dark-mode input:focus,
+.dark-mode textarea:focus,
+.dark-mode select:focus {
+  border-color: var(--green);
+  background: var(--bg-secondary);
+}
+
+.dark-mode input::placeholder,
+.dark-mode textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* Cards */
+.dark-mode .card,
+.dark-mode .profile-card,
+.dark-mode .match-card,
+.dark-mode .restaurant-card,
+.dark-mode .event-card {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+.dark-mode .card:hover,
+.dark-mode .profile-card:hover,
+.dark-mode .match-card:hover,
+.dark-mode .restaurant-card:hover,
+.dark-mode .event-card:hover {
+  box-shadow: 0 8px 24px var(--shadow-color);
+}
+
+/* Dashboard */
+.dark-mode .stat-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.dark-mode .stat-card:hover {
+  border-color: var(--green);
+  box-shadow: 0 4px 20px rgba(0, 210, 122, 0.2);
+}
+
+.dark-mode .verification-step {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.dark-mode .community-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+/* Messages */
+.dark-mode .messages {
+  background: var(--bg-primary);
+}
+
+.dark-mode .messages-container {
+  background: var(--bg-secondary);
+}
+
+.dark-mode .conversations-sidebar {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+.dark-mode .conversation-item {
+  border-color: var(--border-color);
+}
+
+.dark-mode .conversation-item:hover {
+  background: var(--bg-tertiary);
+}
+
+.dark-mode .conversation-item.active {
+  background: var(--bg-tertiary);
+  border-left-color: var(--green);
+}
+
+.dark-mode .chat-area {
+  background: var(--bg-primary);
+}
+
+.dark-mode .chat-header {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+.dark-mode .message.own .message-content {
+  background: var(--green);
+  color: var(--bg-primary);
+}
+
+.dark-mode .message.other .message-content {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.dark-mode .message-input-form {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+.dark-mode .message-input-form input {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+/* Browse */
+.dark-mode .browse {
+  background: var(--bg-primary);
+}
+
+.dark-mode .profile-info {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.dark-mode .swipe-actions {
+  background: var(--bg-secondary);
+}
+
+.dark-mode .action-btn {
+  background: var(--bg-tertiary);
+  border-color: var(--border-color);
+}
+
+.dark-mode .action-btn:hover {
+  border-color: currentColor;
+}
+
+/* Matches */
+.dark-mode .matches {
+  background: var(--bg-primary);
+}
+
+.dark-mode .likes-section {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+/* Profile */
+.dark-mode .profile {
+  background: var(--bg-primary);
+}
+
+.dark-mode .profile-header {
+  background: var(--bg-secondary);
+}
+
+.dark-mode .profile-content {
+  background: var(--bg-secondary);
+}
+
+.dark-mode .photo-upload-area {
+  background: var(--bg-tertiary);
+  border-color: var(--border-color);
+}
+
+/* Settings */
+.dark-mode .settings {
+  background: var(--bg-primary);
+}
+
+.dark-mode .settings-section {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+/* Restaurants */
+.dark-mode .restaurants {
+  background: var(--bg-primary);
+}
+
+.dark-mode .filter-section {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+/* Events */
+.dark-mode .events {
+  background: var(--bg-primary);
+}
+
+.dark-mode .filter-btn {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+.dark-mode .filter-btn:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.dark-mode .filter-btn.active {
+  background: var(--green);
+  color: var(--bg-primary);
+}
+
+.dark-mode .events-cta {
+  background: var(--bg-secondary);
+}
+
+/* Modals */
+.dark-mode .modal-overlay {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.dark-mode .modal-content {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Date Picker */
+.dark-mode .date-divider {
+  color: var(--text-tertiary);
+}
+
+.dark-mode .date-divider span {
+  background: var(--bg-primary);
+}
+
+/* Loading States */
+.dark-mode .loading {
+  border-color: var(--bg-tertiary);
+  border-top-color: var(--green);
+}
+
+.dark-mode .skeleton {
+  background: var(--bg-tertiary);
+}
+
+.dark-mode .skeleton::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--bg-secondary),
+    transparent
+  );
+}
+
+/* Tooltips */
+.dark-mode .tooltip {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+/* Badges */
+.dark-mode .dietary-badge {
+  background: var(--bg-tertiary);
+  color: var(--green);
+  border: 1px solid var(--green);
+}
+
+.dark-mode .founding-badge {
+  background: var(--bg-tertiary);
+  color: #FFD700;
+  border: 1px solid #FFD700;
+}
+
+/* Video Chat */
+.dark-mode .video-chat {
+  background: #000000;
+}
+
+.dark-mode .control-btn {
+  background: var(--bg-tertiary);
+}
+
+.dark-mode .control-btn:hover:not(:disabled) {
+  background: var(--bg-secondary);
+}
+
+.dark-mode .date-ideas {
+  background: rgba(0, 0, 0, 0.9);
+  color: var(--text-primary);
+}
+
+/* Onboarding */
+.dark-mode .onboarding-overlay {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.dark-mode .onboarding-content {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Error Boundary */
+.dark-mode .error-boundary {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Compatibility Insights */
+.dark-mode .compatibility-modal .modal-content {
+  background: var(--bg-secondary);
+}
+
+.dark-mode .compatibility-section {
+  background: var(--bg-tertiary);
+}
+
+.dark-mode .tip-card {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+}
+
+/* Landing Page */
+.dark-mode .landing {
+  background: var(--bg-primary);
+}
+
+.dark-mode .hero {
+  background: linear-gradient(
+    135deg,
+    var(--bg-primary) 0%,
+    var(--bg-secondary) 100%
+  );
+}
+
+.dark-mode .feature-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.dark-mode .how-it-works {
+  background: var(--bg-secondary);
+}
+
+.dark-mode .step-card {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+}
+
+.dark-mode .cta-section {
+  background: var(--bg-secondary);
+}
+
+/* Scrollbar */
+.dark-mode ::-webkit-scrollbar {
+  background: var(--bg-secondary);
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+}
+
+.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: var(--gray);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--green);
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.dark-mode .theme-toggle {
+  background: var(--bg-tertiary);
+  border: 2px solid var(--green);
+}

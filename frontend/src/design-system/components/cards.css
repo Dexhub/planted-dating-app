@@ -1,0 +1,580 @@
+/*
+ * Planted Card System
+ * Premium cards with organic movement and sophisticated depth
+ */
+
+/* ========================================
+   BASE CARD STYLES
+   Foundation for all card variants
+   ======================================== */
+
+.card {
+  /* Layout */
+  background: var(--color-surface);
+  border: var(--card-border-width) solid var(--color-border);
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+  
+  /* Visual */
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  position: relative;
+  
+  /* Animation */
+  transition: var(--transition-planted);
+  transform: translateY(0);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(0, 210, 122, 0.2);
+}
+
+/* ========================================
+   CARD VARIANTS
+   Different card styles for different contexts
+   ======================================== */
+
+/* Feature Card - For landing page features */
+.card-feature {
+  background: var(--color-surface);
+  border: var(--border-width) solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--card-border-radius);
+  padding: var(--space-10);
+  text-align: center;
+  transition: var(--transition-planted);
+}
+
+.card-feature:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--color-accent);
+}
+
+.card-feature .card-icon {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent);
+  border-radius: var(--border-radius-lg);
+  font-size: 2rem;
+  color: var(--planted-white);
+}
+
+.card-feature .card-title {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.card-feature .card-description {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+/* Profile Card - For user profiles and matches */
+.card-profile {
+  background: var(--color-surface);
+  border-radius: var(--card-border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition-planted);
+  cursor: pointer;
+}
+
+.card-profile:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: var(--shadow-xl);
+}
+
+.card-profile .profile-image {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  background: var(--color-surface-cream);
+}
+
+.card-profile .profile-info {
+  padding: var(--space-6);
+}
+
+.card-profile .profile-name {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.card-profile .profile-details {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.card-profile .profile-badges {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* Stats Card - For dashboard statistics */
+.card-stats {
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--card-border-radius);
+  padding: var(--space-8);
+  text-align: center;
+  transition: var(--transition-planted);
+}
+
+.card-stats:hover {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-planted);
+  transform: translateY(-3px);
+}
+
+.card-stats .stats-number {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-black);
+  color: var(--color-accent);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-2);
+}
+
+.card-stats .stats-label {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Event Card - For community events */
+.card-event {
+  background: var(--color-surface);
+  border-radius: var(--card-border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition-planted);
+}
+
+.card-event:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-event .event-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: var(--color-surface-cream);
+}
+
+.card-event .event-content {
+  padding: var(--space-6);
+}
+
+.card-event .event-date {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2);
+}
+
+.card-event .event-title {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-3);
+  line-height: var(--line-height-tight);
+}
+
+.card-event .event-description {
+  font-family: var(-font-secondary);
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-4);
+}
+
+.card-event .event-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* Restaurant Card - For restaurant recommendations */
+.card-restaurant {
+  background: var(--color-surface);
+  border-radius: var(--card-border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition-planted);
+}
+
+.card-restaurant:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-restaurant .restaurant-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: var(--color-surface-cream);
+}
+
+.card-restaurant .restaurant-content {
+  padding: var(--space-5);
+}
+
+.card-restaurant .restaurant-name {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.card-restaurant .restaurant-cuisine {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+}
+
+.card-restaurant .restaurant-rating {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.card-restaurant .restaurant-address {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ========================================
+   CARD LAYOUTS
+   Different arrangements and compositions
+   ======================================== */
+
+/* Card Grid */
+.card-grid {
+  display: grid;
+  gap: var(--grid-gap);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.card-grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.card-grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.card-grid-4 {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+/* Card List - Horizontal layout */
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.card-horizontal {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-6);
+}
+
+.card-horizontal .card-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  flex-shrink: 0;
+}
+
+.card-horizontal .card-content {
+  flex: 1;
+}
+
+/* ========================================
+   CARD COMPONENTS
+   Reusable elements within cards
+   ======================================== */
+
+/* Card Header */
+.card-header {
+  padding: var(--space-6) var(--space-6) 0;
+  margin-bottom: var(--space-4);
+  border-bottom: var(--border-width) solid var(--color-border);
+  padding-bottom: var(--space-4);
+}
+
+.card-header .card-title {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.card-header .card-subtitle {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin: var(--space-2) 0 0 0;
+}
+
+/* Card Body */
+.card-body {
+  padding: 0 var(--space-6) var(--space-6);
+}
+
+.card-body p {
+  margin: 0 0 var(--space-4) 0;
+  line-height: var(--line-height-relaxed);
+}
+
+.card-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Card Footer */
+.card-footer {
+  padding: 0 var(--space-6) var(--space-6);
+  margin-top: auto;
+  border-top: var(--border-width) solid var(--color-border);
+  padding-top: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+/* Card Actions */
+.card-actions {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+/* ========================================
+   CARD STATES
+   Loading, empty, and error states
+   ======================================== */
+
+/* Loading Card */
+.card-loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: card-shimmer 1.5s infinite;
+}
+
+@keyframes card-shimmer {
+  to {
+    left: 100%;
+  }
+}
+
+/* Empty Card */
+.card-empty {
+  padding: var(--space-12);
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.card-empty .empty-icon {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto var(--space-4);
+  opacity: 0.5;
+}
+
+.card-empty .empty-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-2);
+}
+
+.card-empty .empty-description {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ========================================
+   SPECIALTY CARDS
+   Unique designs for specific features
+   ======================================== */
+
+/* Community Card - For dashboard community section */
+.card-community {
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+  color: var(--planted-white);
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-community::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: rotate(45deg);
+}
+
+.card-community .card-title,
+.card-community .card-description {
+  color: var(--planted-white);
+  position: relative;
+  z-index: 1;
+}
+
+/* Quote Card - For testimonials */
+.card-quote {
+  background: var(--color-surface-cream);
+  border-left: 4px solid var(--color-accent);
+  position: relative;
+}
+
+.card-quote::before {
+  content: '"';
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  font-family: var(--font-primary);
+  font-size: 4rem;
+  color: var(--color-accent);
+  opacity: 0.3;
+  line-height: 1;
+}
+
+.card-quote .quote-text {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-lg);
+  font-style: italic;
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-6);
+  padding-left: var(--space-8);
+}
+
+.card-quote .quote-author {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   Mobile-specific card adaptations
+   ======================================== */
+
+@media (max-width: 640px) {
+  .card {
+    padding: var(--space-6);
+  }
+  
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+  
+  .card-horizontal {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .card-horizontal .card-image {
+    width: 100%;
+    height: 200px;
+  }
+  
+  .card-feature {
+    padding: var(--space-8);
+  }
+  
+  .card-feature .card-icon {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+  }
+}
+
+/* ========================================
+   DARK MODE ADJUSTMENTS
+   Theme-specific card styles
+   ======================================== */
+
+.dark-mode .card {
+  background: var(--color-surface-card);
+  border-color: var(--color-border-subtle);
+}
+
+.dark-mode .card:hover {
+  border-color: rgba(0, 210, 122, 0.4);
+}
+
+.dark-mode .card-feature {
+  background: var(--color-surface-elevated);
+  border-color: var(--color-border-subtle);
+}
+
+.dark-mode .card-quote {
+  background: var(--color-surface-elevated);
+}
+
+.dark-mode .card-loading::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+}
